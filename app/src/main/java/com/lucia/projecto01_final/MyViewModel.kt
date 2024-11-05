@@ -83,10 +83,17 @@ class MyViewModel : ViewModel(){
         }
     }
 
+    fun comenzarPartida(contexto: Context) {
+        estadoLiveData.value = Estados.GENERANDO
+        generarSecuencia()
+        toastSecuencia(contexto);
+        estadoLiveData.value = Estados.ADIVINANDO
+    }
+
     /**
      * Controla las acciones a realizar segun el estado de la ronda actual
      */
-    fun estadoRonda(): Unit {
+    fun comprovarAdivinacion(): Unit {
         Log.d("ComprobacionSecuencia",compararSecuencias().toString())
         if (compararSecuencias()) {
             Log.d("ComprobacionTerminarRonda",comprobarRondaTerminada().toString())
@@ -94,12 +101,12 @@ class MyViewModel : ViewModel(){
                 incrementarRonda()
                 resetearSecuencias(false)
                 setNuevoRecord()
-                //ctrHabilitarBtn()
+                estadoLiveData.value = Estados.INICIO
             }
         }else{
             resetearRonda()
             resetearSecuencias(true)
-            //ctrHabilitarBtn()
+            estadoLiveData.value = Estados.INICIO
         }
     }
 }
