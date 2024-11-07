@@ -5,6 +5,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlin.random.Random
 
 class MyViewModel : ViewModel(){
@@ -93,7 +96,10 @@ class MyViewModel : ViewModel(){
     /**
      * Controla las acciones a realizar segun el estado de la ronda actual
      */
-    fun comprovarAdivinacion(): Unit {
+    fun comprovarAdivinacion(numColor: Int): Unit {
+
+        añadirColorSecuenciaJugador(numColor)
+
         Log.d("ComprobacionSecuencia",compararSecuencias().toString())
         if (compararSecuencias()) {
             Log.d("ComprobacionTerminarRonda",comprobarRondaTerminada().toString())
