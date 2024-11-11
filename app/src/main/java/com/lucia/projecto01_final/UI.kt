@@ -16,6 +16,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 
 @Composable
 fun UI(miViewModel: MyViewModel) {
@@ -55,24 +57,16 @@ fun SimonDice(miViewModel: MyViewModel) { // ToDo: Mover variables
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            BotonColor(miViewModel = miViewModel, color = Colors.ROJO,
-                onClick = { color -> botonActual = color.nom }
-            )
-            BotonColor(miViewModel = miViewModel, color = Colors.AZUL,
-                onClick = { color -> botonActual = color.nom }
-            )
+            BotonColor(miViewModel = miViewModel, Colors.ROJO, onClick = { color -> botonActual = color.nom })
+            BotonColor(miViewModel = miViewModel, Colors.AZUL, onClick = { color -> botonActual = color.nom })
         }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            BotonColor(miViewModel = miViewModel, color = Colors.VERDE,
-                onClick = { color -> botonActual = color.nom }
-            )
-            BotonColor(miViewModel = miViewModel, color = Colors.AMARILLO,
-                onClick = { color -> botonActual = color.nom }
-            )
+            BotonColor(miViewModel = miViewModel, Colors.VERDE, onClick = { color -> botonActual = color.nom })
+            BotonColor(miViewModel = miViewModel, Colors.AMARILLO, onClick = { color -> botonActual = color.nom })
 
         }
 
@@ -118,7 +112,9 @@ fun BotonComenzar(miViewModel: MyViewModel,contexto: Context) {
  * Crea un boton apartir de su color correspondiente
  */
 @Composable
-fun BotonColor(miViewModel: MyViewModel, color: Colors,onClick: (Colors) -> Unit) {
+fun BotonColor(miViewModel: MyViewModel, enum_color: Colors,onClick: (Colors) -> Unit) {
+
+    var _color by remember { mutableStateOf(enum_color.color) }
 
     var _activo by remember { mutableStateOf(miViewModel.estadoLiveData.value!!.btnColor_activo) }
 
@@ -126,20 +122,24 @@ fun BotonColor(miViewModel: MyViewModel, color: Colors,onClick: (Colors) -> Unit
         _activo = miViewModel.estadoLiveData.value!!.btnColor_activo
     }
 
+    LaunchedEffect(_activo) {
+        Log.d("LaunchEffect",_activo.toString())
+        while (_activo) {
+            _color = enum_color.color_suave
+            Log.d("LaunchEffect","cambando a suave")
+            delay(1000)
+            _color = enum_color.color
+            delay(1000)
+        }
+    }
+
     Button(
         onClick = {
-            onClick(color)
-            Log.d("BotonColorClick", color.nom)
-            miViewModel.comprovarAdivinacion(color.num)
+            onClick(enum_color)
+            Log.d("BotonColorClick", enum_color.nom)
+            miViewModel.comprovarAdivinacion(enum_color.num)
         },
-        colors = ButtonDefaults.buttonColors(
-            when (color) {
-                Colors.ROJO -> Color.Red
-                Colors.VERDE -> Color.Green
-                Colors.AMARILLO -> Color.Yellow
-                Colors.AZUL -> Color.Blue
-            }
-        ),
+        colors = ButtonDefaults.buttonColors(_color),
         enabled = _activo,
         modifier = Modifier
             .width(150.dp)

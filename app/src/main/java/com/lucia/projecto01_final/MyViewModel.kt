@@ -80,12 +80,18 @@ class MyViewModel : ViewModel(){
         Datos.rondasConsecutivas = 0
     }
 
+    /**
+     * Comprueba si el numero consecutivo de rondas es mayor que el recor actual, y de ser asi, lo remplaza
+     */
     fun setNuevoRecord() {
         if(Datos.record.numRondas < Datos.rondasConsecutivas){
             Datos.record.numRondas = Datos.rondasConsecutivas
         }
     }
 
+    /**
+     * Maneja las acciones a realizar al principio de una ronda
+     */
     fun comenzarPartida(contexto: Context) {
         estadoLiveData.value = Estados.GENERANDO
         generarSecuencia()
