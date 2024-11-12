@@ -2,6 +2,7 @@ package com.lucia.projecto01_final
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -105,7 +106,7 @@ fun BotonComenzar(miViewModel: MyViewModel,contexto: Context) {
 
     TextButton(
         onClick = {
-            miViewModel.comenzarPartida(contexto);
+            miViewModel.estadoLiveData.value = Estados.GENERANDO
         },
         enabled = _activo,
         modifier = Modifier

@@ -12,6 +12,10 @@ class MainActivity : ComponentActivity() {
 
         val miViewModel: MyViewModel = MyViewModel()
 
+        miViewModel.estadoLiveData.observe(this) { estado ->
+            miViewModel.manejarEstados(estado)
+        }
+
         enableEdgeToEdge()
         setContent {
             Projecto01FinalTheme {

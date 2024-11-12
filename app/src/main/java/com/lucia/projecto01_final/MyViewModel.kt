@@ -3,6 +3,7 @@ package com.lucia.projecto01_final
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,12 +16,25 @@ class MyViewModel : ViewModel(){
     val estadoLiveData: MutableLiveData<Estados> = MutableLiveData(Estados.INICIO)
 
     /**
+     *
+     */
+    fun manejarEstados(estado: Estados): Unit {
+        when(estado){
+            Estados.INICIO -> null
+            Estados.GENERANDO -> generarSecuencia()
+            Estados.MOSTRANDO -> null
+            Estados.ADIVINANDO -> null
+            Estados.COMPROBANDO -> null
+        }
+    }
+
+    /**
      * Añade a la secuencia de colores un numero del 1 al 4 generado aleatoriamente
      */
     fun generarSecuencia(): Unit {
         Datos.secuenciaMaquina.add(Random.nextInt(4) + 1)
-
         Log.d("BotonCrearClick", Datos.secuenciaMaquina.toString())
+
     }
 
     fun añadirColorSecuenciaJugador(numColor: Int): Unit {
@@ -47,6 +61,7 @@ class MyViewModel : ViewModel(){
     fun toastSecuencia(contexto: Context): Unit {
         val toast = Toast.makeText(contexto, Datos.secuenciaMaquina.toString(), Toast.LENGTH_LONG)
         toast.show()
+        estadoLiveData.value = Estados.ADIVINANDO
     }
 
     /**
@@ -87,10 +102,8 @@ class MyViewModel : ViewModel(){
     }
 
     fun comenzarPartida(contexto: Context) {
-        estadoLiveData.value = Estados.GENERANDO
         generarSecuencia()
         toastSecuencia(contexto);
-        estadoLiveData.value = Estados.ADIVINANDO
     }
 
     /**
