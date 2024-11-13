@@ -34,7 +34,7 @@ fun UI(miViewModel: MyViewModel) {
 }
 
 @Composable
-fun SimonDice(miViewModel: MyViewModel) { // ToDo: Mover variables
+fun SimonDice(miViewModel: MyViewModel) {
 
     var botonActual by remember { mutableStateOf("") }
     val contexto = LocalContext.current
@@ -131,7 +131,8 @@ fun BotonColor(miViewModel: MyViewModel, color: Colors,onClick: (Colors) -> Unit
         onClick = {
             onClick(color)
             Log.d("BotonColorClick", color.nom)
-            miViewModel.comprovarAdivinacion(color.num)
+            miViewModel.añadirColorSecuenciaJugador(color.num)
+            miViewModel.comprovarAdivinacion()
         },
         colors = ButtonDefaults.buttonColors(
             when (color) {

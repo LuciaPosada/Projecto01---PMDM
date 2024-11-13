@@ -19,6 +19,8 @@ enum class Estados(val btnComenzar_activo: Boolean, val btnColor_activo: Boolean
     MOSTRANDO(btnComenzar_activo = false, btnColor_activo = false),
     ADIVINANDO(btnComenzar_activo = false, btnColor_activo = true),
     COMPROBANDO(btnComenzar_activo = false, btnColor_activo = false),
+    ACTAULIZANDO_PERDIDO(btnComenzar_activo = false, btnColor_activo = false),
+    ACTAULIZANDO_GANADO(btnComenzar_activo = false, btnColor_activo = false)
 }
 
 /**

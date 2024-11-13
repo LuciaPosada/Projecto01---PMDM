@@ -20,11 +20,13 @@ class MyViewModel : ViewModel(){
      */
     fun manejarEstados(estado: Estados): Unit {
         when(estado){
-            Estados.INICIO -> null
+            Estados.INICIO -> null //En espera de accion del jugador
             Estados.GENERANDO -> generarSecuencia()
-            Estados.MOSTRANDO -> null
-            Estados.ADIVINANDO -> null
-            Estados.COMPROBANDO -> null
+            Estados.MOSTRANDO -> null // toastSecuencia(contexto)
+            Estados.ADIVINANDO -> null //En espera de accion del jugador
+            Estados.COMPROBANDO -> comprovarAdivinacion()
+            Estados.ACTAULIZANDO_PERDIDO -> null // resetearRonda();resetearSecuencias(true)
+            Estados.ACTAULIZANDO_GANADO -> null // incrementarRonda();resetearSecuencias(false);setNuevoRecord()
         }
     }
 
@@ -34,6 +36,7 @@ class MyViewModel : ViewModel(){
     fun generarSecuencia(): Unit {
         Datos.secuenciaMaquina.add(Random.nextInt(4) + 1)
         Log.d("BotonCrearClick", Datos.secuenciaMaquina.toString())
+        estadoLiveData.value = Estados.MOSTRANDO
 
     }
 
@@ -109,9 +112,7 @@ class MyViewModel : ViewModel(){
     /**
      * Controla las acciones a realizar segun el estado de la ronda actual
      */
-    fun comprovarAdivinacion(numColor: Int): Unit {
-
-        añadirColorSecuenciaJugador(numColor)
+    fun comprovarAdivinacion(): Unit {
 
         Log.d("ComprobacionSecuencia",compararSecuencias().toString())
         if (compararSecuencias()) {
