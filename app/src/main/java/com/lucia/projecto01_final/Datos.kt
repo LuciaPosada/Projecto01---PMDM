@@ -1,13 +1,15 @@
 package com.lucia.projecto01_final
 
+import androidx.compose.ui.graphics.Color
+
 /**
  * Colores del juego is sus valores correspondientes
  */
-enum class Colors (val num: Int,var nom: String) {
-    ROJO(1,"rojo"),
-    VERDE(2,"verde"),
-    AMARILLO(3,"amarillo"),
-    AZUL(4,"azul");
+enum class Colors (val num: Int, var nom: String, val color: Color, val color_suave: Color = Color.Transparent) {
+    ROJO(1,"rojo",color = Color.Red),
+    VERDE(2,"verde",color = Color.Green),
+    AMARILLO(3,"amarillo",color = Color.Yellow),
+    AZUL(4,"azul",color = Color.Blue);
 }
 
 /**
