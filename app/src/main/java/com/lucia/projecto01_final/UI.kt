@@ -37,7 +37,6 @@ fun UI(miViewModel: MyViewModel) {
 fun SimonDice(miViewModel: MyViewModel) {
 
     var botonActual by remember { mutableStateOf("") }
-    val contexto = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -87,7 +86,7 @@ fun SimonDice(miViewModel: MyViewModel) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
-            BotonComenzar(miViewModel,contexto)
+            BotonComenzar(miViewModel)
         }
     }
 }
@@ -96,7 +95,7 @@ fun SimonDice(miViewModel: MyViewModel) {
  * Crea un boton para comenzar la ronda
  */
 @Composable
-fun BotonComenzar(miViewModel: MyViewModel,contexto: Context) {
+fun BotonComenzar(miViewModel: MyViewModel) {
 
     var _activo by remember { mutableStateOf(miViewModel.estadoLiveData.value!!.btnComenzar_activo) }
 
