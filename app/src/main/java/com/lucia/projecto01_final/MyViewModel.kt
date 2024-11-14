@@ -16,28 +16,11 @@ class MyViewModel : ViewModel(){
     val estadoLiveData: MutableLiveData<Estados> = MutableLiveData(Estados.INICIO)
 
     /**
-     *
-     */
-    fun manejarEstados(estado: Estados): Unit {
-        when(estado){
-            Estados.INICIO -> null //En espera de accion del jugador
-            Estados.GENERANDO -> generarSecuencia()
-            Estados.MOSTRANDO -> null // toastSecuencia(contexto)
-            Estados.ADIVINANDO -> null //En espera de accion del jugador
-            Estados.COMPROBANDO -> comprovarAdivinacion()
-            Estados.ACTAULIZANDO_PERDIDO -> null // resetearRonda();resetearSecuencias(true)
-            Estados.ACTAULIZANDO_GANADO -> null // incrementarRonda();resetearSecuencias(false);setNuevoRecord()
-        }
-    }
-
-    /**
      * Añade a la secuencia de colores un numero del 1 al 4 generado aleatoriamente
      */
     fun generarSecuencia(): Unit {
         Datos.secuenciaMaquina.add(Random.nextInt(4) + 1)
         Log.d("BotonCrearClick", Datos.secuenciaMaquina.toString())
-        estadoLiveData.value = Estados.MOSTRANDO
-
     }
 
     fun añadirColorSecuenciaJugador(numColor: Int): Unit {
@@ -64,7 +47,6 @@ class MyViewModel : ViewModel(){
     fun toastSecuencia(contexto: Context): Unit {
         val toast = Toast.makeText(contexto, Datos.secuenciaMaquina.toString(), Toast.LENGTH_LONG)
         toast.show()
-        estadoLiveData.value = Estados.ADIVINANDO
     }
 
     /**
@@ -104,29 +86,22 @@ class MyViewModel : ViewModel(){
         }
     }
 
-    fun comenzarPartida(contexto: Context) {
-        generarSecuencia()
-        toastSecuencia(contexto);
-    }
-
     /**
      * Controla las acciones a realizar segun el estado de la ronda actual
      */
     fun comprovarAdivinacion(): Unit {
-
-        Log.d("ComprobacionSecuencia",compararSecuencias().toString())
+        Log.d("ComprobacionSecuencia","Se ha perdido la partida? "+compararSecuencias().toString())
         if (compararSecuencias()) {
-            Log.d("ComprobacionTerminarRonda",comprobarRondaTerminada().toString())
-            if(comprobarRondaTerminada()){
-                incrementarRonda()
-                resetearSecuencias(false)
-                setNuevoRecord()
-                estadoLiveData.value = Estados.INICIO
+            Log.d("ComprobacionSecuencia","Se ha acabado la partida? "+comprobarRondaTerminada().toString())
+            if (comprobarRondaTerminada()) {
+                estadoLiveData.value = Estados.ACTAULIZANDO_GANADO
+            }else{
+                estadoLiveData.value = Estados.ADIVINANDO
             }
-        }else{
-            resetearRonda()
-            resetearSecuencias(true)
-            estadoLiveData.value = Estados.INICIO
+        } else {
+            estadoLiveData.value = Estados.ACTAULIZANDO_PERDIDO
         }
     }
+
+
 }
