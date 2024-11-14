@@ -24,7 +24,7 @@ enum class Estados(val btnComenzar_activo: Boolean, val btnColor_activo: Boolean
 }
 
 /**
- * Varios datos
+ * Varios datos del programa
  */
 object Datos {
     var secuenciaMaquina = mutableListOf<Int>() // secuencia generada por el programa

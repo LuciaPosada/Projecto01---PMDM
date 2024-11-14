@@ -20,11 +20,12 @@ class MyViewModel : ViewModel(){
      */
     fun generarSecuencia(): Unit {
         Datos.secuenciaMaquina.add(Random.nextInt(4) + 1)
-        Log.d("BotonCrearClick", Datos.secuenciaMaquina.toString())
+        Log.d("ESTADO-GENERANDO", "Secuencia maquina: "+Datos.secuenciaMaquina.toString())
     }
 
     fun añadirColorSecuenciaJugador(numColor: Int): Unit {
         Datos.secuenciaJugador.add(numColor)
+        Log.d("ESTADO-ADIVINANDO", "Boton pulsado: "+numColor)
     }
 
     /**
@@ -34,9 +35,10 @@ class MyViewModel : ViewModel(){
         Datos.secuenciaJugador.clear()
         if (resetSMaquina == true){
             Datos.secuenciaMaquina.clear()
-            Log.d("EstadoRonda", "Perdida")
+            Log.d("ESTADO-ACTAULIZANDO_PERDIDO", "Reseteando la secuencia maquina")
+            Log.d("ESTADO-ACTAULIZANDO_PERDIDO", "Secuencia maquina: "+Datos.secuenciaMaquina.toString())
         }else{
-            Log.d("EstadoRonda", "Ganada")
+            Log.d("ESTADO-ACTAULIZANDO_GANADO", "Secuencia maquina: "+Datos.secuenciaMaquina.toString())
         }
     }
 
@@ -47,6 +49,7 @@ class MyViewModel : ViewModel(){
     fun toastSecuencia(contexto: Context): Unit {
         val toast = Toast.makeText(contexto, Datos.secuenciaMaquina.toString(), Toast.LENGTH_LONG)
         toast.show()
+        Log.d("ESTADO-MOSTRANDO", "Se ha mostrado la secuencia")
     }
 
     /**
@@ -55,7 +58,9 @@ class MyViewModel : ViewModel(){
      */
     fun compararSecuencias(): Boolean {
         val indice = Datos.secuenciaJugador.size - 1
-        return Datos.secuenciaJugador[indice] == Datos.secuenciaMaquina[indice]
+        var comprobacion = Datos.secuenciaJugador[indice] == Datos.secuenciaMaquina[indice]
+        Log.d("ESTADO-COMPROBANDO", "Se ha perdido la partida? "+!comprobacion)
+        return comprobacion
     }
 
     /**
@@ -63,36 +68,54 @@ class MyViewModel : ViewModel(){
      * @return `true` si tienen el mismo tamaño, `false` en caso contrario
      */
     fun comprobarRondaTerminada(): Boolean {
-        return Datos.secuenciaJugador.size == Datos.secuenciaMaquina.size
+        var comprobacion = Datos.secuenciaJugador.size == Datos.secuenciaMaquina.size
+        Log.d("ESTADO-COMPROBANDO", "Se ha acabado la ronda? "+comprobacion)
+        return comprobacion
     }
 
     /**
      * Incrementa el numero de rondas superadas
      */
-    fun incrementarRonda() {
+    fun incrementarRonda(): Unit {
         Datos.rondasConsecutivas ++
+        Log.d("ESTADO-ACTAULIZANDO_GANADO", "Se ha aumentado el numero de la ronda")
+        Log.d("ESTADO-ACTAULIZANDO_GANADO", "Ronda: "+Datos.rondasConsecutivas)
     }
 
     /**
      * Devuelve a cero el numero de rondas superadas
      */
-    fun resetearRonda() {
+    fun resetearRonda(): Unit {
         Datos.rondasConsecutivas = 0
+        Log.d("ESTADO-ACTAULIZANDO_PERDIDO", "Reseteando el numero de la ronda")
+        Log.d("ESTADO-ACTAULIZANDO_PERDIDO", "Ronda: "+Datos.rondasConsecutivas)
     }
 
-    fun setNuevoRecord() {
-        if(Datos.record.numRondas < Datos.rondasConsecutivas){
+    /**
+     * Aumenta el record de darse el caso que se haya superado
+     */
+    fun setNuevoRecord(): Unit {
+        if(comprobarRecord()){
             Datos.record.numRondas = Datos.rondasConsecutivas
+            Log.d("ESTADO-ACTAULIZANDO_GANADO", "Record: "+Datos.record.numRondas)
         }
     }
 
     /**
-     * Controla las acciones a realizar segun el estado de la ronda actual
+     * Comprueba que si se ha superado el recod de rondas consecutivas
+     * @return `true` si se ha superado el record, `false` en caso contrario
+     */
+    fun comprobarRecord(): Boolean{
+        var comprobacion = Datos.record.numRondas < Datos.rondasConsecutivas
+        Log.d("ESTADO-ACTAULIZANDO_GANADO", "Se ha superado el record? "+comprobacion)
+        return comprobacion
+    }
+
+    /**
+     * Controla los cambios de estado a realizar segun el imput del usuario
      */
     fun comprovarAdivinacion(): Unit {
-        Log.d("ComprobacionSecuencia","Se ha perdido la partida? "+compararSecuencias().toString())
         if (compararSecuencias()) {
-            Log.d("ComprobacionSecuencia","Se ha acabado la partida? "+comprobarRondaTerminada().toString())
             if (comprobarRondaTerminada()) {
                 estadoLiveData.value = Estados.ACTAULIZANDO_GANADO
             }else{
