@@ -6,4 +6,4 @@
 
 ## Diagrama de Estados
 
-![Diagrama Estados](/img/diagrama_estados.png)
+![Diagrama Estados](img/digrama_estados.png)
