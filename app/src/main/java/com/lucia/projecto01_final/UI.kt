@@ -129,7 +129,6 @@ fun BotonColor(miViewModel: MyViewModel, color: Colors,onClick: (Colors) -> Unit
     Button(
         onClick = {
             onClick(color)
-            Log.d("BotonColorClick", color.nom)
             miViewModel.añadirColorSecuenciaJugador(color.num)
             miViewModel.estadoLiveData.value = Estados.COMPROBANDO
         },

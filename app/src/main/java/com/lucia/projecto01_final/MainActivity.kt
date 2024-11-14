@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         val miViewModel: MyViewModel = MyViewModel()
 
         /**
-         *
+         * Lanza los metodos especificos para cada estado cuando detecta un cambio de estado
          */
         fun manejarEstados(estado: Estados): Unit {
             when (estado) {
