@@ -14,11 +14,11 @@ enum class Dificultades (val velocidad : Int) {
 /**
  * Colores del juego is sus valores correspondientes
  */
-enum class Colors (val num: Int, var nom: String, val color: Color, val color_suave: Color = Color.Transparent) {
-    ROJO(1,"rojo",color = Color.Red),
-    VERDE(2,"verde",color = Color.Green),
-    AMARILLO(3,"amarillo",color = Color.Yellow),
-    AZUL(4,"azul",color = Color.Blue);
+enum class Colors (val num: Int, var nom: String, val color: Color, val color_suave: Color) {
+    ROJO(1,"rojo",Color.Red,Color(0xFFFEA9A9)),
+    VERDE(2,"verde",Color.Green,Color(0xFFABFEA9)),
+    AMARILLO(3,"amarillo",Color.Yellow,Color(0xFFFDFEA9)),
+    AZUL(4,"azul",Color.Blue,Color(0xFFA9BEFE));
 }
 
 /**
