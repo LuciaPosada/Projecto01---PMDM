@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -117,18 +118,17 @@ fun BotonColor(miViewModel: MyViewModel, enum_color: Colors,onClick: (Colors) ->
 
     var _activo by remember { mutableStateOf(miViewModel.estadoLiveData.value!!.btnColor_activo) }
 
+    val iluminado by miViewModel.iluminadoFlow.collectAsState()
+
     miViewModel.estadoLiveData.observe(LocalLifecycleOwner.current) {
         _activo = miViewModel.estadoLiveData.value!!.btnColor_activo
     }
 
-    LaunchedEffect(_activo) {
-        Log.d("LaunchEffect",_activo.toString())
-        while (_activo) {
-            _color = enum_color.color_suave
-            Log.d("LaunchEffect","cambando a suave")
-            delay(1000)
-            _color = enum_color.color
-            delay(1000)
+    LaunchedEffect(iluminado) {
+        if(iluminado == enum_color.num){
+            _color = enum_color.color_suave // Color iluminado
+        }else{
+            _color = enum_color.color // Color normal
         }
     }
 

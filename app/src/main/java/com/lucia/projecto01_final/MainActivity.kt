@@ -24,6 +24,7 @@ class MainActivity : ComponentActivity() {
                     miViewModel.estadoLiveData.value = Estados.MOSTRANDO }
                 Estados.MOSTRANDO -> {
                     miViewModel.toastSecuencia(this)
+                    miViewModel.mostrarSecuencia()
                     miViewModel.estadoLiveData.value = Estados.ADIVINANDO }
                 Estados.ADIVINANDO -> null    // En espera de acción del jugador
                 Estados.COMPROBANDO -> miViewModel.comprovarAdivinacion()

@@ -3,6 +3,15 @@ package com.lucia.projecto01_final
 import androidx.compose.ui.graphics.Color
 
 /**
+ *
+ */
+enum class Dificultades (val velocidad : Int) {
+    FACIL(800),
+    NORMAL(500),
+    DIFICIL(200)
+}
+
+/**
  * Colores del juego is sus valores correspondientes
  */
 enum class Colors (val num: Int, var nom: String, val color: Color, val color_suave: Color = Color.Transparent) {

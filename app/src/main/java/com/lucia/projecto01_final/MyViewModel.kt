@@ -6,14 +6,34 @@ import android.widget.Toast
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MyViewModel : ViewModel(){
 
     val estadoLiveData: MutableLiveData<Estados> = MutableLiveData(Estados.INICIO)
+
+    val iluminadoFlow = MutableStateFlow<Int?>(null)
+
+
+    /**
+     * Muestra la secuencia generada iluminando los botones
+     */
+    fun mostrarSecuencia() {
+        viewModelScope.launch {
+            for(num in Datos.secuenciaMaquina){
+                iluminadoFlow.emit(num)
+                delay(500)
+                iluminadoFlow.emit(null)
+                delay(500)
+            }
+        }
+    }
 
     /**
      * Añade a la secuencia de colores un numero del 1 al 4 generado aleatoriamente
