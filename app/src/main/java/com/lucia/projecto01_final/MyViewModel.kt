@@ -86,16 +86,6 @@ class MyViewModel : ViewModel(){
     }
 
     /**
-     * Crea un Toast a partir de la secuencia de colores generada por la aplicacion
-     * @param contexto Contexto para mostrar el Toast
-     */
-    fun toastSecuencia(contexto: Context): Unit {
-        val toast = Toast.makeText(contexto, Datos.secuenciaMaquina.toString(), Toast.LENGTH_LONG)
-        toast.show()
-        Log.d("ESTADO-MOSTRANDO", "Se ha mostrado la secuencia")
-    }
-
-    /**
      * Compara el último elemento de la secuencia del jugador con el correspondiente en la secuencia generada
      * @return `true` si el último elemento coincide, `false` en caso contrario
      */
