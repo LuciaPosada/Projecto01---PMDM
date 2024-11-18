@@ -17,6 +17,32 @@ class MyViewModel : ViewModel(){
 
     val iluminadoFlow = MutableStateFlow<Int?>(null)
 
+    /**
+     * Lanza los metodos especificos para cada estado cuando detecta un cambio de estado
+     */
+    fun manejarEstados(estado: Estados): Unit {
+        when (estado) {
+            Estados.INICIO -> null     // En espera de acción del jugado
+            Estados.GENERANDO -> {
+                generarSecuencia()
+                estadoLiveData.value = Estados.MOSTRANDO }
+            Estados.MOSTRANDO -> {
+                mostrarSecuencia()
+                estadoLiveData.value = Estados.ADIVINANDO }
+            Estados.ADIVINANDO -> null    // En espera de acción del jugador
+            Estados.COMPROBANDO -> comprovarAdivinacion()
+            Estados.ACTAULIZANDO_PERDIDO -> {
+                resetearRonda()
+                resetearSecuencias(resetSMaquina = true)
+                estadoLiveData.value = Estados.INICIO }
+            Estados.ACTAULIZANDO_GANADO -> {
+                incrementarRonda()
+                resetearSecuencias(resetSMaquina = false)
+                setNuevoRecord()
+                estadoLiveData.value = Estados.INICIO }
+        }
+    }
+
 
     /**
      * Muestra la secuencia generada iluminando los botones
