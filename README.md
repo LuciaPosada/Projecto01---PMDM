@@ -16,7 +16,7 @@
 
 ### Base del Programa
 
-Este respositorio continua el programa del respositorio [Proyecto01](https://github.com/LuciaPosada/Proyecto01), donde el programa aun no seguia el modelo MVVVM, debido al cambio a esta arquitectura, decidi crear un nuevo repositorio.
+Este respositorio continua el programa del respositorio [Proyecto01](https://github.com/LuciaPosada/Proyecto01), donde el programa aun no seguia el modelo MVVVM, debido al cambio a esta arquitectura, decidi crear un nuevo repositorio para continuar el desarrollo de manera mas ordenada.
 
 ---
 
@@ -106,7 +106,14 @@ Contiene las funciones composables para la interfaz
 <details>
     <summary>Expandir</summary>
 
-- 
+- SimonDice()
+  - Cuerpo principal de la interfaz
+
+- BotonComenzar()
+  - Logica del boton comenzar
+ 
+- BotonColor()
+  - Logica de los botones de colores
     
 </details>
 
