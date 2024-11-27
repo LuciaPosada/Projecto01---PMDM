@@ -1,5 +1,6 @@
 package com.lucia.projecto01_final
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +12,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val miViewModel: MyViewModel = MyViewModel()
+
+        miViewModel.estadoLiveData.observe(this) { estado ->
+            miViewModel.manejarEstados(estado)
+        }
 
         enableEdgeToEdge()
         setContent {
