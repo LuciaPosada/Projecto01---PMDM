@@ -1,5 +1,9 @@
 # SimonDice
 
+Este programa implementa un juego clásico de "Simón Dice". La arquitectura sigue principios de separación de responsabilidades (MVVM).
+
+---
+
 ## Diagramas
 
 ### Diagrama de Secuencia
@@ -135,3 +139,9 @@ Contiene las funciones composables para la interfaz
 </details>
 
 ---
+
+### Mejoras
+
+El programa requiere hacerle un refractor para modularizar mas la interfaz y modificar algunos metodos para que sean mas versatiles.
+
+
