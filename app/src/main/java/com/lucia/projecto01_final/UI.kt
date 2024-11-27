@@ -48,7 +48,7 @@ fun SimonDice(miViewModel: MyViewModel) {
     ) {
 
         Text(
-            text = "Ronda: ${Datos.rondasConsecutivas} | Record: ${Datos.record.numRondas}",
+            text = "Ronda: ${miViewModel.getRonda()} | Record: ${miViewModel.getRecord()}",
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
@@ -70,7 +70,7 @@ fun SimonDice(miViewModel: MyViewModel) {
             BotonColor(miViewModel = miViewModel, Colors.AMARILLO, onClick = { color -> botonActual = color.nom })
         }
 
-        Text(text = "Boton: ${Datos.secuenciaJugador.lastOrNull()?.toString() ?: " "} - $botonActual",
+        Text(text = "Boton: $botonActual",
             modifier = Modifier
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
