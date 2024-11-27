@@ -24,6 +24,28 @@ Este respositorio continua el programa del respositorio [Proyecto01](https://git
 
 ---
 
+### MainActivity
+
+Punto de entrada de la aplicación
+
+<details>
+    <summary>Expandir</summary>
+<br>
+
+```bash
+
+> miViewModel:
+    Instancia de la clase ViewModel cuyo estado se observa desde aquí para realizar llamadas al metodo manejarEstados()
+
+> setContent()
+    Configura el contenido de la actividad usando Jetpack Compose
+
+```
+
+</details>
+
+---
+
 ### Datos (Model)
 
 Contiene los datos del programa
