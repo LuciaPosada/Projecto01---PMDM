@@ -35,12 +35,6 @@ fun SimonDice(miViewModel: MyViewModel) {
 
     var botonActual by remember { mutableStateOf("") }
 
-    var _ronda by remember { mutableStateOf(Datos.rondaLiveData.value!!) }
-
-    miViewModel.estadoLiveData.observe(LocalLifecycleOwner.current) {
-        _ronda = Datos.rondaLiveData.value!!
-    }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
