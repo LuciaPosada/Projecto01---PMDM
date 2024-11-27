@@ -1,15 +1,7 @@
 package com.lucia.projecto01_final
 
 import androidx.compose.ui.graphics.Color
-
-/**
- *
- */
-enum class Dificultades (val velocidad : Int) {
-    FACIL(800),
-    NORMAL(500),
-    DIFICIL(200)
-}
+import androidx.lifecycle.MutableLiveData
 
 /**
  * Colores del juego is sus valores correspondientes
@@ -38,6 +30,8 @@ enum class Estados(val btnComenzar_activo: Boolean, val btnColor_activo: Boolean
  * Varios datos del programa
  */
 object Datos {
+    val rondaLiveData: MutableLiveData<Int> = MutableLiveData(0)
+
     var secuenciaMaquina = mutableListOf<Int>() // secuencia generada por el programa
     var secuenciaJugador = mutableListOf<Int>() // secuencia generada por el jugador
 

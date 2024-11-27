@@ -49,6 +49,7 @@ class MyViewModel : ViewModel(){
      */
     fun mostrarSecuencia() {
         viewModelScope.launch {
+            Log.d("ESTADO-MOSTRANDO", "Mostrando secuencia")
             for(num in Datos.secuenciaMaquina){
                 iluminadoFlow.emit(num)
                 delay(500)
