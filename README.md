@@ -212,6 +212,8 @@ Contiene las funciones composables para la interfaz
 
 ### Mejoras
 
-El programa requiere hacerle un refractor para modularizar mas la interfaz y modificar algunos metodos para que sean mas versatiles.
+El programa requiere hacerle una refractorizacion para modularizar mas la interfaz y modificar algunos metodos para que sean mas versatiles.
+
+Tambien debiria mejorarse el diseño de interfaz.
 
 
