@@ -125,14 +125,28 @@ Contiene las funciones composables para la interfaz
 
 ```bash
 
+> UI()
+    Punto de entrada de la UI
+
 > SimonDice()
     Cuerpo principal de la interfaz
+    Contiene:
+        - Texto con información sobre la ronda y el récord
+        - Botones para cada color (rojo, azul, verde y amarillo)
+        - Un botón para comenzar la partida
+        - Texto para mostrar qué botón ha sido seleccionado por el jugador
 
 > BotonComenzar()
-    Logica del boton comenzar
+    Logica y diseño del boton comenzar
+    Acciones al pulsar:
+        - Cambia el estado del juego a *GENERANDO*, comenzando una nueva ronda
  
 > BotonColor()
-    Logica de los botones de colores
+    Logica y diseño de los botones de colores
+    Acciones al pulsar:
+        - Cambia el estado del juego a *COMPROBANDO* para evaluar el resultado
+        - Reporta el color seleccionado al uno de los Text de la interfaz
+        - Añade el color del boton pulsado a la secuencia del jugador
 
 ```
     
