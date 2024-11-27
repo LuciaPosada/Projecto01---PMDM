@@ -160,5 +160,18 @@ class MyViewModel : ViewModel(){
         }
     }
 
+    /**
+     * Getter de la ronda actual
+     */
+    fun getRonda(): Int {
+       return Datos.rondasConsecutivas
+    }
+
+    /**
+     * Getter del record
+     */
+    fun getRecord(): Int {
+        return Datos.record.numRondas
+    }
 
 }
